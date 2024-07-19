@@ -1,0 +1,32 @@
+﻿@model IEnumerable<GunShop.Models.Order>
+
+@{
+    ViewData["Title"] = "Order History";
+}
+
+<h1>Order History</h1>
+
+<form asp-action="ClearHistory" method="post">
+    <button type="submit" class="btn btn-danger">Clear History</button>
+</form>
+
+@foreach (var order in Model)
+{
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Order Date: @order.OrderDate.ToString("g")</h4>
+            <p>Name: @order.Name</p>
+            <p>Address: @order.Address</p>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                @foreach (var item in order.OrderItems)
+                {
+                    <li class="list-group-item">
+                        <strong>@item.Gun.Model</strong> - Quantity: @item.Quantity
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}

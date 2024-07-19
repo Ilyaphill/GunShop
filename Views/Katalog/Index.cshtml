@@ -1,0 +1,53 @@
+﻿@model IEnumerable<GunShop.Models.Gun>
+
+@{
+    ViewData["Title"] = "Katalog";
+}
+
+<h1>Katalog</h1>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Model</h5>
+                    <p class="card-text">@item.Description</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Manufacturer:</strong> @item.Manufacturer</li>
+                        <li class="list-group-item"><strong>Type:</strong> @item.Type</li>
+                        <li class="list-group-item"><strong>Caliber:</strong> @item.Caliber</li>
+                        <li class="list-group-item"><strong>Price:</strong> @item.Price</li>
+                        <li class="list-group-item"><strong>Weight:</strong> @item.Weight</li>
+                        <li class="list-group-item"><strong>Magazine Capacity:</strong> @item.MagazineCapacity</li>
+                    </ul>
+                    <a href="@Url.Action("Details", "Guns", new { id = item.Id })" class="btn btn-primary">View Details</a>
+                    <button class="btn btn-success add-to-basket" data-gun-id="@item.Id">Add to Basket</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.add-to-basket').click(function () {
+                var gunId = $(this).data('gun-id');
+                $.ajax({
+                    url: '@Url.Action("AddToBasket", "Basket")',
+                    type: 'POST',
+                    data: { gunId: gunId },
+                    success: function () {
+                        alert('Added to basket');
+                    },
+                    error: function () {
+                        alert('Error adding to basket');
+                    }
+                });
+            });
+        });
+    </script>
+}

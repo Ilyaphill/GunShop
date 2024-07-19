@@ -1,0 +1,62 @@
+﻿@model IEnumerable<GunShop.Models.Gun>
+
+@{
+    ViewData["Title"] = "Welcome to GunShop";
+}
+
+<div class="jumbotron text-center bg-primary text-white">
+    <h1 class="display-4">Welcome to GunShop</h1>
+    <p class="lead">Your one-stop shop for the finest firearms and accessories.</p>
+    <hr class="my-4">
+    <p>Browse our extensive collection of high-quality guns, ammunition, and gear. We pride ourselves on offering exceptional customer service and competitive prices.</p>
+    <a class="btn btn-light btn-lg" asp-controller="Katalog" asp-action="Index" role="button">Browse Our Catalog</a>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Quality Products</h5>
+                    <p class="card-text">We offer only the highest quality firearms from top manufacturers.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Expert Advice</h5>
+                    <p class="card-text">Our knowledgeable staff is here to help you find exactly what you need.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Secure Shopping</h5>
+                    <p class="card-text">Enjoy a safe and secure shopping experience with our trusted payment options.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container my-5">
+    <h2 class="text-center">Special Offers</h2>
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Limited Time Offer!</h4>
+        <p>Get up to 20% off on selected firearms. Hurry, the offer ends soon!</p>
+        <a class="btn btn-danger" asp-controller="Katalog" asp-action="Index" role="button">Shop Now</a>
+    </div>
+</div>
+
+<div class="container my-5">
+    <h2 class="text-center">Contact Us</h2>
+    <p class="text-center">If you have any questions or need assistance, feel free to reach out to us.</p>
+    <ul class="list-unstyled text-center">
+        <li>Email: <a href="mailto:support@gunshop.com">support@gunshop.com</a></li>
+        <li>Phone: +1 (123) 456-7890</li>
+        <li>Address: 123 Main Street, Anytown, USA</li>
+    </ul>
+</div>
