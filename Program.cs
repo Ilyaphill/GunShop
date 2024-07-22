@@ -1,7 +1,10 @@
 using GunShop.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<GunShopContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("GunShopContext") ?? throw new InvalidOperationException("Connection string 'GunShopContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -9,9 +9,9 @@ namespace GunShop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly GunShopContext _context;
 
-        public HomeController(AppDbContext context)
+        public HomeController(GunShopContext context)
         {
             _context = context;
         }
@@ -19,7 +19,11 @@ namespace GunShop.Controllers
         public async Task<IActionResult> Index()
         {
             // Получаем популярные товары
-            var popularGuns = await _context.Guns.OrderByDescending(g => g.Price).Take(6).ToListAsync();
+            var popularGuns = await _context.Gun
+                .OrderByDescending(g => g.Price)
+                .Take(6)
+                .ToListAsync();
+
             return View(popularGuns);
         }
     }

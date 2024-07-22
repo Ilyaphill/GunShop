@@ -1,14 +1,15 @@
 ﻿using GunShop.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace GunShop.Controllers
 {
     public class KatalogController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly GunShopContext _context;
 
-        public KatalogController(AppDbContext context)
+        public KatalogController(GunShopContext context)
         {
             _context = context;
         }
@@ -16,9 +17,7 @@ namespace GunShop.Controllers
         // GET: Katalog
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Guns.ToListAsync());
+            return View(await _context.Gun.ToListAsync());
         }
     }
- 
-    }
-
+}

@@ -8,9 +8,9 @@ namespace GunShop.Controllers
 {
     public class BasketController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly GunShopContext _context;
 
-        public BasketController(AppDbContext context)
+        public BasketController(GunShopContext context)
         {
             _context = context;
         }
