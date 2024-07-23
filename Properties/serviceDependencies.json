@@ -10,7 +10,8 @@
     },
     "mssql1": {
       "type": "mssql",
-      "connectionId": "ConnectionStrings:GunShopContext"
+      "connectionId": "ConnectionStrings:GunShopContext",
+      "dynamicId": null
     }
   }
 }
