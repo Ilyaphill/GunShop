@@ -11,6 +11,8 @@ builder.Services.AddDbContext<GunShopContext>(options =>
 
 // Добавление сервисов в контейнер
 builder.Services.AddControllersWithViews();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -37,6 +39,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseRouting();
 
 app.UseAuthorization();
@@ -44,5 +49,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllers();
 
 app.Run();
