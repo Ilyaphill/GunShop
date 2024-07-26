@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GunShop.Data;
 using GunShop.Models;
 
 namespace GunShop.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class Guns1Controller : ControllerBase
+    
+    public class Guns1Controller : Controller
     {
         private readonly GunShopContext _context;
 
@@ -19,81 +20,134 @@ namespace GunShop.Controllers
             _context = context;
         }
 
-        // GET: api/guns1
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Gun>>> GetGuns()
+        // GET: Guns1
+        public async Task<IActionResult> Index()
         {
-            return await _context.Gun.ToListAsync();
+            return View(await _context.Gun.ToListAsync());
         }
 
-        // GET: api/guns1/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Gun>> GetGun(int id)
+        // GET: Guns1/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            var gun = await _context.Gun.FindAsync(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var gun = await _context.Gun
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (gun == null)
             {
                 return NotFound();
             }
 
-            return gun;
+            return View(gun);
         }
 
-        // POST: api/guns1
-        [HttpPost]
-        public async Task<ActionResult<Gun>> PostGun(Gun gun)
+        // GET: Guns1/Create
+        public IActionResult Create()
         {
-            _context.Gun.Add(gun);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetGun), new { id = gun.Id }, gun);
+            return View();
         }
 
-        // PUT: api/guns1/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutGun(int id, Gun gun)
+        // POST: Guns1/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Model,Manufacturer,Type,Caliber,Price,Weight,MagazineCapacity,Description")] Gun gun)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(gun);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(gun);
+        }
+
+        // GET: Guns1/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var gun = await _context.Gun.FindAsync(id);
+            if (gun == null)
+            {
+                return NotFound();
+            }
+            return View(gun);
+        }
+
+        // POST: Guns1/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Model,Manufacturer,Type,Caliber,Price,Weight,MagazineCapacity,Description")] Gun gun)
         {
             if (id != gun.Id)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(gun).State = EntityState.Modified;
-
-            try
+            if (ModelState.IsValid)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!GunExists(id))
+                try
                 {
-                    return NotFound();
+                    _context.Update(gun);
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!GunExists(gun.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
+                return RedirectToAction(nameof(Index));
             }
-
-            return NoContent();
+            return View(gun);
         }
 
-        // DELETE: api/guns1/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGun(int id)
+        // GET: Guns1/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            var gun = await _context.Gun.FindAsync(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var gun = await _context.Gun
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (gun == null)
             {
                 return NotFound();
             }
 
-            _context.Gun.Remove(gun);
-            await _context.SaveChangesAsync();
+            return View(gun);
+        }
 
-            return NoContent();
+        // POST: Guns1/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var gun = await _context.Gun.FindAsync(id);
+            if (gun != null)
+            {
+                _context.Gun.Remove(gun);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         private bool GunExists(int id)

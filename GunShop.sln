@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GunShop", "GunShop.csproj", "{3B3FAF54-64B6-4621-A500-7B596D83EAAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GunShop", "GunShop.csproj", "{3B3FAF54-64B6-4621-A500-7B596D83EAAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GunShop.Shared", "..\GunShop.Shared\GunShop.Shared.csproj", "{F9C5BF0E-A77A-4284-8DA7-A720852C60DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GunShop.Maui", "..\GunShop.Maui\GunShop.Maui.csproj", "{9CC50213-91ED-4009-8AAE-10E2A1F2A0B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,16 @@ Global
 		{3B3FAF54-64B6-4621-A500-7B596D83EAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B3FAF54-64B6-4621-A500-7B596D83EAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B3FAF54-64B6-4621-A500-7B596D83EAAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9C5BF0E-A77A-4284-8DA7-A720852C60DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9C5BF0E-A77A-4284-8DA7-A720852C60DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9C5BF0E-A77A-4284-8DA7-A720852C60DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9C5BF0E-A77A-4284-8DA7-A720852C60DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC50213-91ED-4009-8AAE-10E2A1F2A0B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC50213-91ED-4009-8AAE-10E2A1F2A0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC50213-91ED-4009-8AAE-10E2A1F2A0B3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9CC50213-91ED-4009-8AAE-10E2A1F2A0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC50213-91ED-4009-8AAE-10E2A1F2A0B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC50213-91ED-4009-8AAE-10E2A1F2A0B3}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
